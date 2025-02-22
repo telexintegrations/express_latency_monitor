@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 export const URL = 'https://nodejs-latency-monitor.onrender.com';
 
 export const IntegrationConfig = {
@@ -24,16 +26,18 @@ export const IntegrationConfig = {
       'high-latency-alert',
     ],
     author: 'Victor M. Adeleye',
+    message: 'Latency monitoring for Express applications',
     settings: [
       {
         label: 'channel_webhook',
         type: 'text',
         required: true,
-        default: `https://ping.telex.im/v1/webhooks/019529e1-c35c-7964-82c6-b55baf1f828f`,
+        description: 'The webhook URL for alert notifications',
+        default: process.env.ALERT_WEBHOOK || "Not set",
       },
     ],
-    target_url:
-      'https://ping.telex.im/v1/webhooks/019529e1-c35c-7964-82c6-b55baf1f828f',
+    target_url: process.env.TARGET_URL,
     tick_url: `${URL}`,
+    website: 'https://telex.im',
   },
 };
