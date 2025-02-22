@@ -1,4 +1,4 @@
-export const URL = 'https://3130-102-89-84-140.ngrok-free.app';
+export const URL = 'https://nodejs-latency-monitor.onrender.com';
 
 export const IntegrationConfig = {
   data: {
@@ -12,7 +12,7 @@ export const IntegrationConfig = {
         'ExpressTS-APM is designed to provide seamless latency monitoring for Express applications using TypeScript.',
       app_logo:
         'https://github.com/telexintegrations/nodejs_latency_monitor/blob/main/src/data/logo.jpg?raw=true',
-      app_url: `${URL}/`,
+      app_url: `${URL}`,
       background_color: '#fff',
     },
     is_active: true,
@@ -34,6 +34,6 @@ export const IntegrationConfig = {
     ],
     target_url:
       'https://ping.telex.im/v1/webhooks/019529e1-c35c-7964-82c6-b55baf1f828f',
-    tick_url: `${URL}/`,
+    tick_url: `${URL}`,
   },
 };
