@@ -1,8 +1,12 @@
 import express, { Request, Response } from 'express';
 import latencyMonitor from './middlewares/latencyMonitor';
 import { IntegrationConfig } from './config/config';
+import cors from 'cors';
+import { corsMiddleware } from './middlewares/corsMiddleware';
 
 const app = express();
+
+app.use(corsMiddleware);
 
 let requestCount = 0;
 let startTime = Date.now();

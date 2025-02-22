@@ -4,12 +4,12 @@ import { INotificationPayload } from '../interfaces/notification.interface';
 
 class NotificationService {
   static async sendNotification(payload: INotificationPayload): Promise<void> {
-
     return new Promise<void>((resolve, reject) => {
       const workerPath = path.resolve(
-        __dirname, '../../dist/workers/notification.worker.js'
+        __dirname,
+        '../../dist/workers/notification.worker.js',
       );
-      console.log('Worker path:', workerPath);
+
       const worker = new Worker(workerPath, {
         execArgv:
           process.env.NODE_ENV === 'production'
@@ -33,8 +33,6 @@ class NotificationService {
           reject(`Notification Worker stopped with exit code ${code}`);
         }
       });
-
-
     });
   }
 }
