@@ -26,7 +26,7 @@ const latencyHistogram = new Histogram({
   labelNames: ['method', 'status'],
   buckets: [0.005, 0.01, 0.025, 0.05, 0.1, 0.25, 0.5, 1, 2.5, 5, 10],
   registers: [register],
-})
+});
 
 let totalRequests = 0;
 let totalErrors = 0;
@@ -50,9 +50,9 @@ const latencyMonitor = (
       errorCount.inc({ method: req.method, status: res.statusCode.toString() });
       totalErrors++;
     }
-latencyHistogram.observe(3)
-    console.log(`${req.method} ${req.url} - ${responseTime.toFixed(3)} ms`);
 
+    console.log(`${req.method} ${req.url} - ${responseTime.toFixed(3)} ms`);
+    latencyHistogram.observe(1);
     const errorRate =
       totalRequests > 0 ? (totalErrors / totalRequests) * 100 : 0;
     const elapsedTime = (performance.now() - startTime) / 1000;

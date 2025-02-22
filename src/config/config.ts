@@ -11,7 +11,7 @@ export const IntegrationConfig = {
       app_description:
         'ExpressTS-APM is designed to provide seamless latency monitoring for Express applications using TypeScript.',
       app_logo:
-        'https://images.freeimages.com/images/large-previews/5b3/slow-desert-tortoise-exploration-0410-5700223.jpg',
+        'https://github.com/telexintegrations/nodejs_latency_monitor/blob/main/src/data/logo.jpg?raw=true',
       app_url: `${URL}/`,
       background_color: '#fff',
     },
@@ -29,7 +29,7 @@ export const IntegrationConfig = {
         label: 'channel_webhook',
         type: 'text',
         required: true,
-        default: '',
+        default: `https://ping.telex.im/v1/webhooks/019529e1-c35c-7964-82c6-b55baf1f828f`,
       },
     ],
     target_url:
