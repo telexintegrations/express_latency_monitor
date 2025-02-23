@@ -9,7 +9,7 @@ export const IntegrationConfig = {
       updated_at: '2025-02-21',
     },
     descriptions: {
-      app_name: 'Express Latency Monitor',
+      app_name: 'Nodejs(Express) Latency Monitor',
       app_description:
         'ExpressTS-APM is designed to provide seamless latency monitoring for Express applications using TypeScript.',
       app_logo:

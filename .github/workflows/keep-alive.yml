@@ -1,0 +1,16 @@
+name: Keep Server Alive
+
+on:
+  schedule:
+    # Runs every 10 minutes
+    - cron: '*/10 * * * *'
+
+jobs:
+  keep-alive:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Send Keep-Alive Request
+        run: |
+          curl -X GET https://https://nodejs-latency-monitor.onrender.com/api/test-latency || echo "Server not reachable"
+
