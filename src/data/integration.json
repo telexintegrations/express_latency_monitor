@@ -28,7 +28,7 @@
         "default": ""
       }
     ],
-    "target_url": "https://ping.telex.im/v1/webhooks/019529e2-4a36-7965-8a07-e160ed18b3ff",
-    "tick_url": ""
+    "target_url": "https://ping.telex.im/v1/webhooks/0195349e-5223-76a4-8b03-4a7374921ab0",
+    "tick_url": "https://nodejs-latency-monitor.onrender.com"
   }
 }
