@@ -1,14 +1,25 @@
 import path from 'path';
 import { Worker } from 'worker_threads';
 import { INotificationPayload } from '../interfaces/notification.interface';
+import axios from 'axios';
 
 class NotificationService {
   static async sendNotification(payload: INotificationPayload): Promise<void> {
-    return new Promise<void>((resolve, reject) => {
+    return new Promise<void>(async (resolve, reject) => {
       const workerPath = path.resolve(
         __dirname,
         '../../dist/workers/notification.worker.js',
       );
+    console.log('Sending Notification:', payload);
+    console.log('Webhook URL:', process.env.ALERT_WEBHOOK);
+    const response = await axios.post(
+      process.env.ALERT_WEBHOOK as string,
+      payload,
+      {
+        timeout: 5000,
+      },
+    );
+
 
       const worker = new Worker(workerPath, {
         execArgv:
