@@ -32,6 +32,9 @@ app.get('/api/test-latency', (req, res) => {
   }, 4000); // 4000 ms > 3000 ms threshold
 });
 
+app.get('/keep-running', (req, res) => {
+  res.send('App is running!');
+});
 
 // Route: GET /simulate-throughput
 app.get('/throughput-simulator', (req: Request, res: Response) => {
