@@ -26,6 +26,12 @@ app.get('/slow-simulator', async (req: Request, res: Response) => {
   res.send('Response after 5 seconds');
 });
 
+app.get('/api/test-latency', (req, res) => {
+  setTimeout(() => {
+    res.send('Delayed response');
+  }, 4000); // 4000 ms > 3000 ms threshold
+});
+
 
 // Route: GET /simulate-throughput
 app.get('/throughput-simulator', (req: Request, res: Response) => {
