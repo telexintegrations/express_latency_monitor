@@ -1,9 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
 import { performance } from 'perf_hooks';
 import { Counter, Histogram, Registry } from 'prom-client';
-import AlertWorker from '../workers/latencyAlertWorker';
-import { IAlertDetails } from '../interfaces/alert.interface';
-import path from 'path';
+import { INotificationPayload } from '../interfaces/notification.interface';
+import NotificationService from '../services/notificationService';
 
 const register = new Registry();
 const requestCount = new Counter({
@@ -43,35 +42,28 @@ const latencyMonitor = (
     const requestEndTime = performance.now();
     const responseTime = requestEndTime - requestStartTime;
 
-    requestCount.inc({ method: req.method, status: res.statusCode.toString() });
-    totalRequests++;
-
-    if (res.statusCode >= 400) {
-      errorCount.inc({ method: req.method, status: res.statusCode.toString() });
-      totalErrors++;
-    }
-
     console.log(`${req.method} ${req.url} - ${responseTime.toFixed(3)} ms`);
-    latencyHistogram.observe(1);
-    const errorRate =
-      totalRequests > 0 ? (totalErrors / totalRequests) * 100 : 0;
-    const elapsedTime = (performance.now() - startTime) / 1000;
-    const throughput = totalRequests / elapsedTime;
-
-    console.log(`Error Rate: ${errorRate.toFixed(2)}%`);
-    console.log(`Throughput: ${throughput.toFixed(2)} requests/second`);
 
     if (responseTime > 3000) {
-      const alertDetails: IAlertDetails = {
-        method: req.method,
-        url: req.url,
-        responseTime: responseTime.toFixed(3),
-        statusCode: res.statusCode,
+      const alertMessage = `🚨 High Latency Alert: ${req.method} ${
+        req.url
+      } took ${responseTime.toFixed(3)} ms`;
+
+      const notificationDetails: INotificationPayload = {
+        eventName: 'High Latency Detected',
+        status: 'warning',
+        username: 'ExpressTS Latency Monitor',
+        message: alertMessage,
       };
 
-      AlertWorker.processHighLatencyAlert(alertDetails).catch((err) =>
-        console.error('Alert Worker Error:', err),
-      );
+      // Call the Notification Service here
+      NotificationService.sendNotification(notificationDetails)
+        .then(() => {
+          console.log('Notification Sent Successfully');
+        })
+        .catch((error) => {
+          console.error('Notification Sending Failed:', error);
+        });
     }
   });
 
