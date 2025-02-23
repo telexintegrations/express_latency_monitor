@@ -22,14 +22,14 @@ app.get('/integration-configurations', (req: Request, res: Response) => {
 
 // Route: GET /simulate-slow
 app.get('/slow-simulator', async (req: Request, res: Response) => {
-  await new Promise((resolve) => setTimeout(resolve, 5000)); // Simulate 4.5s delay
+  await new Promise((resolve) => setTimeout(resolve, 9000)); // Simulate 4.5s delay
   res.send('Response after 5 seconds');
 });
 
 app.get('/api/test-latency', (req, res) => {
   setTimeout(() => {
     res.send('Delayed response');
-  }, 4000); // 4000 ms > 3000 ms threshold
+  }, 8000); // 4000 ms > 3000 ms threshold
 });
 
 app.get('/keep-running', (req, res) => {

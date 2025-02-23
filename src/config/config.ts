@@ -26,7 +26,6 @@ export const IntegrationConfig = {
       'high-latency-alert',
     ],
     author: 'Victor M. Adeleye',
-    message: 'Latency monitoring for Express applications',
     settings: [
       {
         label: 'channel_webhook',
@@ -38,6 +37,5 @@ export const IntegrationConfig = {
     ],
     target_url: process.env.TARGET_URL,
     tick_url: `${URL}`,
-    website: 'https://telex.im',
   },
 };

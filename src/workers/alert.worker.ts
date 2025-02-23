@@ -3,24 +3,26 @@ import NotificationService from '../services/notificationService';
 import { IAlertDetails } from '../interfaces/alert.interface';
 import { INotificationDetails, INotificationPayload } from '../interfaces/notification.interface';
 
-if (parentPort) {
-  parentPort.on('message', async (data: IAlertDetails) => {
-    console.log('Worker received data:', data);
+class AlertWorker {
+  static async processHighLatencyAlert(data: IAlertDetails): Promise<void> {
+    console.log('Processing High Latency Alert:', data);
 
     const alertMessage = `🚨 High Latency Alert: ${data.method} ${data.url} took ${data.responseTime} ms`;
 
     const notificationDetails: INotificationPayload = {
       eventName: 'High Latency Detected',
       status: 'warning',
-      username: 'ExpressTS APM',
+      username: 'ExpressTS Latency Monitor',
       message: alertMessage,
     };
 
     try {
       await NotificationService.sendNotification(notificationDetails);
-      parentPort?.postMessage('Notification Sent');
+      console.log('Notification Sent Successfully');
     } catch (error) {
-      parentPort?.postMessage('Notification Failed');
+      console.error('Notification Sending Failed:', error);
     }
-  });
+  }
 }
+
+export default AlertWorker;
