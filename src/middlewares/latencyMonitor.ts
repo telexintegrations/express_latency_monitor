@@ -51,7 +51,7 @@ const latencyMonitor = (
 
       const notificationDetails: INotificationPayload = {
         eventName: 'High Latency Detected',
-        status: 'warning',
+        status: 'success',
         username: 'ExpressTS Latency Monitor',
         message: alertMessage,
       };
