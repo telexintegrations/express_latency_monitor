@@ -16,6 +16,12 @@ app.get('/', (req: Request, res: Response) => {
   res.send('Welcome to Express Latency Monitor...');
 });
 
+app.get('/api/test-latency', (req, res) => {
+  setTimeout(() => {
+    res.send('Delayed response');
+  }, 8000); // 4000 ms > 3000 ms threshold
+});
+
 app.get('/integration-configurations', (req: Request, res: Response) => {
   res.json(IntegrationConfig);
 });
