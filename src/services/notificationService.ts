@@ -51,7 +51,9 @@ class NotificationService {
     try {
       const workerPath = path.resolve(
         __dirname,
-        '../workers/notification.worker.ts',
+        process.env.NODE_ENV === 'production'
+          ? '../../dist/workers/notification.worker.js'
+          : '../workers/notification.worker.ts',
       );
       console.log('Sending Notification:', (payload));
     const response = await fetch(ALERT_URL, {
