@@ -4,21 +4,21 @@ import { IAlertDetails } from '../interfaces/alert.interface';
 
 class AlertWorker {
   static async processHighLatencyAlert(details: IAlertDetails): Promise<void> {
-      return new Promise<void>((resolve, reject) => {
+    return new Promise<void>((resolve, reject) => {
       const workerPath = path.resolve(
         __dirname,
         process.env.NODE_ENV === 'production'
-          ? '../workers/alert.worker.ts'
-          : './alert.worker.ts',
+          ? '../dist/workers/notification.worker.js'
+          : '../workers/alert.worker.ts',
       );
-      
+
       const worker = new Worker(workerPath, {
         execArgv:
           process.env.NODE_ENV === 'production'
             ? []
             : ['-r', 'ts-node/register'],
       });
-      
+
       worker.postMessage(details);
 
       worker.on('message', (msg) => {
