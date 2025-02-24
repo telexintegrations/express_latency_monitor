@@ -1,5 +1,5 @@
 export interface INotificationPayload {
-  eventName: string;
+  event_name: string;
   status: string;
   username: string;
   message: string;
