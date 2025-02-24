@@ -8,7 +8,7 @@ class AlertWorker {
       const workerPath = path.resolve(
         __dirname,
         process.env.NODE_ENV === 'production'
-          ? '../../dist/workers/alert.worker.js'
+          ? '../workers/alert.worker.ts'
           : './alert.worker.ts',
       );
       

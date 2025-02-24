@@ -49,7 +49,7 @@ class NotificationService {
     try {
       const workerPath = path.resolve(
         __dirname,
-        '../../dist/workers/notification.worker.js',
+        '../workers/notification.worker.ts',
       );
       await this.createWorker(workerPath, payload);
     } catch (error) {

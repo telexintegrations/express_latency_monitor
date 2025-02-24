@@ -8,8 +8,6 @@
 
 ## **Features**
 - **Latency Monitoring:** Tracks request-response times for all API endpoints.
-- **Error Tracking:** Monitors HTTP status codes for error responses.
-- **Prometheus Metrics:** Exposes metrics compatible with Prometheus scraping.
 - **High Latency Alerts:** Sends alerts to Telex when latency exceeds 3000 ms.
 - **Real-Time Notifications:** Integrates with Telex for instant latency alerts.
 
@@ -24,55 +22,9 @@
 
 ---
 
-## **Installation**
-
-1. **Clone the Repository:**
-   ```bash
-   git clone https://github.com/telexintegrations/nodejs_latency_monitor.git
-   cd express-latency-monitor
-   ```
-
-2. **Install Dependencies:**
-   ```bash
-   npm install
-   ```
-
-3. **Environment Variables:**
-   Create a `.env` file in the root directory and add the following:
-
-   ```env
-   PORT=3000
-   TELEX_WEBHOOK_URL='https://ping.telex.im/v1/webhooks/YOUR_TELEX_WEBHOOK_ID'
-   LATENCY_THRESHOLD=3000
-   ```
-
-4. **Start the Server:**
-   ```bash
-   npm run start
-   ```
-
----
-
 ## **Usage**
 
-1. **Import and Use Middleware in Express App:**
-   ```typescript
-   import express from 'express';
-   import latencyMonitor from './middleware/latencyMonitor';
-
-   const app = express();
-
-   app.use(latencyMonitor);
-
-   app.get('/api/example', (req, res) => {
-     res.send('Example route');
-   });
-
-   const PORT = process.env.PORT || 3000;
-   app.listen(PORT, () => console.log(\`Server running on port \${PORT}\));
-   ```
-
-
+1.
 ## **Telex Integration**
 
 ### **How It Works:**
@@ -101,28 +53,23 @@ Ensure the app is running with the Telex webhook URL correctly configured in `.e
 
 ### **Step 2: Trigger High Latency:**
 Simulate high latency by delaying a response in one of the routes:
-```typescript
-app.get('/api/test-latency', (req, res) => {
-  setTimeout(() => {
-    res.send('Delayed response');
-  }, 4000); // 4000 ms > 3000 ms threshold
-});
+```
 ```
 
 ### **Step 3: Send Request:**
 Open a browser or use `curl` to hit the endpoint:
 ```bash
-curl http://localhost:3000/api/test-latency
+curl https://nodejs-latency-monitor.onrender.com/api/test-latency
 ```
 
 ### **Step 4: Check Telex Dashboard:**
 1. Log in to your **Telex Dashboard**.
-2. Navigate to **Notifications**.
+2. Navigate to **Channel where the webhook is taken**.
 3. Confirm the alert is displayed with the following details:
    - Event Title: **High Latency Detected**
    - Method: `GET`
    - URL: `/api/test-latency`
-   - Response Time: **4000 ms**
+   - Response Time: **8000 ms**
 
 ### **Step 5: Verify Alert Details:**
 Ensure the alert contains:
@@ -131,14 +78,6 @@ Ensure the alert contains:
 - HTTP Status Code
 
 ---
-
-## **Monitoring with Prometheus**
-
-### **Metrics Available:**
-- `requests_total`: Total number of requests received
-- `error_total`: Count of error responses
-- `request_latency_seconds`: Latency distribution of requests
-
 
 ## **Acknowledgements**
 

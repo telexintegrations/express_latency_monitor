@@ -8,16 +8,17 @@ dotenv.config();
 
 // Listen for messages from the main thread
 parentPort?.on('message', async (payload: INotificationPayload) => {
-  
+
   try {
     const response = await axios.post(
       process.env.ALERT_WEBHOOK as string,
       payload,
       {
-        timeout: 5000,
+        timeout: 15000,
       },
     );
-
+console.log('Notification Main Worker message:', response.status);
+console.log('Notification Main Worker message:', payload);
     parentPort?.postMessage({
       status: 'success',
       data: response.status,
