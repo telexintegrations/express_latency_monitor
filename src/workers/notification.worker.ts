@@ -14,7 +14,7 @@ parentPort?.on('message', async (payload: INotificationPayload) => {
       process.env.ALERT_WEBHOOK as string,
       payload,
       {
-        timeout: 15000,
+        timeout: 5000,
       },
     );
 console.log('Notification Main Worker message:', response.status);
