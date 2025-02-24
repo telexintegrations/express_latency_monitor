@@ -10,8 +10,8 @@ class AlertWorker {
     const alertMessage = `🚨 High Latency Alert: ${data.method} ${data.url} took ${data.responseTime} ms`;
 
     const notificationDetails: INotificationPayload = {
-      eventName: 'High Latency Detected',
-      status: 'warning',
+      event_name: 'High Latency Detected',
+      status: 'success',
       username: 'ExpressTS Latency Monitor',
       message: alertMessage,
     };

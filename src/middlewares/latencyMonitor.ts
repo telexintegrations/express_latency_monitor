@@ -50,8 +50,8 @@ const latencyMonitor = (
       } took ${responseTime.toFixed(3)} ms`;
 
       const notificationDetails: INotificationPayload = {
-        eventName: 'High Latency Detected',
-        status: 'warning',
+        event_name: 'High Latency Detected',
+        status: 'success',
         username: 'ExpressTS Latency Monitor',
         message: alertMessage,
       };
