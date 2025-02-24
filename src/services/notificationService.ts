@@ -2,6 +2,8 @@ import path from 'path';
 import { Worker } from 'worker_threads';
 import { INotificationPayload } from '../interfaces/notification.interface';
 
+const ALERT_URL =
+  'https://ping.telex.im/v1/webhooks/0195349e-5223-76a4-8b03-4a7374921ab0';
 class NotificationService {
   // Private method to create and initialize a worker
   private static createWorker(
@@ -51,6 +53,15 @@ class NotificationService {
         __dirname,
         '../workers/notification.worker.ts',
       );
+      console.log('Sending Notification:', (payload));
+    const response = await fetch(ALERT_URL, {
+      method: "POST",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
+    });
       await this.createWorker(workerPath, payload);
     } catch (error) {
       console.error('Failed to send notification:', error);
